@@ -162,6 +162,7 @@ MonoBehaviour:
   nameText: {fileID: 114983409114952420}
   numOfExercises: {fileID: 0}
   exerciseNameText: {fileID: 0}
+  descriptionText: {fileID: 0}
   intensityText: {fileID: 114266072379469670}
   difficultyText: {fileID: 114561468962298256}
   button: {fileID: 0}
@@ -246,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.87058824, g: 0.9647059, b: 0.8784314, a: 1}
+  m_Color: {r: 0.5686275, g: 0.78039217, b: 0.58431375, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -299,6 +300,7 @@ MonoBehaviour:
   isSearchView: 0
   programNameField: {fileID: 0}
   button: {fileID: 0}
+  screen: {fileID: 0}
   listObject: {fileID: 0}
   canvas: {fileID: 0}
   videoClips: []

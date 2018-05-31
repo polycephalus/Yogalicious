@@ -234,29 +234,41 @@ public class ListHandler : MonoBehaviour {
 
     public void setExerciseAsFavourite()
     {
-        if (selectedExercise.getIsFavourite())
+        foreach (Exercise e in exerciseList)
         {
-            selectedExercise.setIsFavourite(false);
-            Debug.Log("No Fav");
-        }
-        else if (!selectedExercise.getIsFavourite())
-        {
-            selectedExercise.setIsFavourite(true);
-            Debug.Log("Fav");
+            if (e.getName().Equals(selectedExercise.getName()))
+            {
+                if (e.getIsFavourite())
+                {
+                    e.setIsFavourite(false);
+                    Debug.Log("No Fav");
+                }
+                else if (!e.getIsFavourite())
+                {
+                    e.setIsFavourite(true);
+                    Debug.Log("Fav");
+                }
+            }
         }
     }
 
     public void setProgramAsFavourite()
     {
-        if (selectedProgram.getIsFavourite())
+        foreach(Program p in programList)
         {
-            selectedProgram.setIsFavourite(false);
-            Debug.Log("No Fav");
-        }
-        else if (!selectedProgram.getIsFavourite())
-        {
-            selectedProgram.setIsFavourite(true);
-            Debug.Log("Fav");
+            if (p.getName().Equals(selectedProgram.getName()))
+            {
+                if (p.getIsFavourite())
+                {
+                    p.setIsFavourite(false);
+                    Debug.Log("No Fav");
+                }
+                else if (!p.getIsFavourite())
+                {
+                    p.setIsFavourite(true);
+                    Debug.Log("Fav");
+                }
+            }
         }
     }
 
@@ -280,8 +292,9 @@ public class ListHandler : MonoBehaviour {
         for(int i = 0; i < programList.Count; i++)
         {
             Program p = programList[i];
-            if(p == selectedProgram)
+            if(p.Equals(selectedProgram))
             {
+                Debug.Log("Tjä");
                 programList[i].removeExercise(e);
             }
         }
@@ -397,6 +410,11 @@ public class ListHandler : MonoBehaviour {
         {
             tempProgram.RemoveAt(i);
         }
+    }
+
+    public void addOldDeleteableExerciseButtonsToContent()
+    {
+
     }
 
     public void addEditProgramButtonsToContent()

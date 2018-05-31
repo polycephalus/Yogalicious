@@ -22,6 +22,9 @@ public class Program : MonoBehaviour {
     public GameObject button;
     public Transform listObject;
 
+    public GameObject fav;
+    public GameObject noFav;
+
     public Button prevExerciseButton;
     public Button nextExerciseButton;
 
@@ -36,6 +39,23 @@ public class Program : MonoBehaviour {
         this.name = name;
         addExercises(e);
         addButtons();
+    }
+
+    private void Awake()
+    {
+        if (isScreen)
+        {
+            if (isFavourite)
+            {
+                fav.SetActive(true);
+                noFav.SetActive(false);
+            }
+            else
+            {
+                fav.SetActive(false);
+                noFav.SetActive(true);
+            }
+        }
     }
 
     //GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER 
@@ -226,7 +246,7 @@ public class Program : MonoBehaviour {
     {
         this.isScreen = isScreen;
         if (isScreen)
-        {
+        {          
             exerciseList = eList;
             nameText.text = name;
             exerciseNameText.text = exerciseName;

@@ -152,6 +152,7 @@ MonoBehaviour:
   isMainScene: 0
   isExerciseView: 0
   isExerciseScene: 0
+  isProgramEditView: 0
   isProgramView: 0
   isProgramScene: 0
   isFavourites: 0
@@ -277,6 +278,7 @@ MonoBehaviour:
   nameText: {fileID: 114610573986550438}
   numOfExercises: {fileID: 114101666958340980}
   exerciseNameText: {fileID: 0}
+  descriptionText: {fileID: 0}
   intensityText: {fileID: 114283169174930774}
   difficultyText: {fileID: 114054268959268902}
   button: {fileID: 0}
@@ -307,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.87058824, g: 0.9647059, b: 0.8784314, a: 1}
+  m_Color: {r: 0.5686275, g: 0.78039217, b: 0.58431375, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
