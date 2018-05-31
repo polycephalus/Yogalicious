@@ -41,23 +41,6 @@ public class Program : MonoBehaviour {
         addButtons();
     }
 
-    private void Awake()
-    {
-        if (isScreen)
-        {
-            if (isFavourite)
-            {
-                fav.SetActive(true);
-                noFav.SetActive(false);
-            }
-            else
-            {
-                fav.SetActive(false);
-                noFav.SetActive(true);
-            }
-        }
-    }
-
     //GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER GET-FUNKTIONER 
 
     public List<Exercise> getExerciseList()
@@ -222,31 +205,11 @@ public class Program : MonoBehaviour {
         }
     }
 
-    public void gotoPrevious() {
-        nextExerciseButton.interactable = true;
-        if (currentExerciseIndex > 0)
-        {
-            prevExerciseButton.interactable = true;
-            currentExerciseIndex--;
-            updateText();
-        }
-    }
-
-    public void gotoNext() {
-        prevExerciseButton.interactable = true;
-        if (currentExerciseIndex < exerciseList.Count - 1)
-        {
-            nextExerciseButton.interactable = true;
-            currentExerciseIndex++;
-            updateText();
-        }
-    }
-
     public void setValues(bool isScreen, List<Exercise> eList, string name, string exerciseName, string intensity, string difficulty)
     {
         this.isScreen = isScreen;
         if (isScreen)
-        {          
+        {
             exerciseList = eList;
             nameText.text = name;
             exerciseNameText.text = exerciseName;
@@ -255,7 +218,7 @@ public class Program : MonoBehaviour {
         }
         else
         {
-            if (exerciseName.Equals(""))
+            if (exerciseName.Length > 0)
             {
                 exerciseList = eList;
                 nameText.text = name;
@@ -272,6 +235,54 @@ public class Program : MonoBehaviour {
 
     //ÖVRIGA FUNKTIONER ÖVRIGA FUNKTIONER ÖVRIGA FUNKTIONER ÖVRIGA FUNKTIONER ÖVRIGA FUNKTIONER ÖVRIGA FUNKTIONER 
 
+    public void gotoPrevious()
+    {
+        nextExerciseButton.interactable = true;
+        if (currentExerciseIndex > 0)
+        {
+            prevExerciseButton.interactable = true;
+            currentExerciseIndex--;
+            updateText();
+        }
+    }
+
+    public void gotoNext()
+    {
+        prevExerciseButton.interactable = true;
+        if (currentExerciseIndex < exerciseList.Count - 1)
+        {
+            nextExerciseButton.interactable = true;
+            currentExerciseIndex++;
+            updateText();
+        }
+    }
+
+    public void removeExercise(Exercise e)
+    {
+        for (int i = 0; i < exerciseList.Count; i++)
+        {
+            Exercise test = exerciseList[i];
+            if (e.getName().Equals(test.getName()))
+            {
+                exerciseList.RemoveAt(i);
+            }
+        }
+    }
+
+    public void toggleFav(bool isFav)
+    {
+        if (isFav)
+        {
+            fav.SetActive(true);
+            noFav.SetActive(false);
+        }
+        else
+        {
+            fav.SetActive(false);
+            noFav.SetActive(true);
+        }
+    }
+
     //Här uppdateras övningsknappens text.
     private void updateText()
     {
@@ -280,18 +291,6 @@ public class Program : MonoBehaviour {
         descriptionText.text = e.getDescription();
         intensityText.text = getConvertIntensityToString(e.getIntensity());
         difficultyText.text = getConvertDifficultyToString(e.getDifficulty());
-    }
-
-    public void removeExercise(Exercise e)
-    {
-        for(int i = 0; i < exerciseList.Count; i++)
-        {
-            Exercise test = exerciseList[i];
-            if (e.getName().Equals(test))
-            {
-                exerciseList.RemoveAt(i);
-            }
-        }
     }
 
     //ADD-FUNKTIONER ADD-FUNKTIONER ADD-FUNKTIONER ADD-FUNKTIONER ADD-FUNKTIONER ADD-FUNKTIONER 

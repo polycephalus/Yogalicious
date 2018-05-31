@@ -150,6 +150,8 @@ MonoBehaviour:
   difficultyText: {fileID: 0}
   button: {fileID: 1127442472632786, guid: 366d6e928c5afd64c8874d1fcd70fce2, type: 2}
   listObject: {fileID: 1944523000}
+  fav: {fileID: 0}
+  noFav: {fileID: 0}
   prevExerciseButton: {fileID: 0}
   nextExerciseButton: {fileID: 0}
 --- !u!4 &6647159
@@ -603,7 +605,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 588084330}
   - {fileID: 1831869266}
   - {fileID: 455388792}
   - {fileID: 1184582543}
@@ -646,7 +647,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 398968029}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -694,73 +695,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 455388791}
---- !u!1 &588084329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1874743146823200, guid: 81e9cc308df82ef458f0e653bc1f297e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 588084330}
-  - component: {fileID: 588084331}
-  m_Layer: 5
-  m_Name: ListHandlerEditProgramView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &588084330
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224086590232246680, guid: 81e9cc308df82ef458f0e653bc1f297e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 588084329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 398968029}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &588084331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114758473513221408, guid: 81e9cc308df82ef458f0e653bc1f297e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 588084329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85447282555c8b64a8b72b55dfae2bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isButton: 0
-  isExercise: 0
-  hasEditableProgram: 0
-  hasAddableExercise: 0
-  hasDeletableExercise: 0
-  isMainScene: 0
-  isExerciseView: 0
-  isExerciseScene: 0
-  isProgramEditView: 0
-  isProgramView: 0
-  isProgramScene: 0
-  isFavourites: 0
-  isSearchView: 0
-  programNameField: {fileID: 0}
-  button: {fileID: 0}
-  screen: {fileID: 0}
-  listObject: {fileID: 0}
-  canvas: {fileID: 0}
-  videoClips: []
 --- !u!1 &604551762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,7 +941,7 @@ RectTransform:
   - {fileID: 1648225722}
   - {fileID: 2076110499}
   m_Father: {fileID: 398968029}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1027,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.86666673, b: 0.72156864, a: 1}
+  m_Color: {r: 0.88235295, g: 0.31141868, b: 0.31141868, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1154,7 +1088,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 398968029}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1381,7 +1315,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hell Naw
+  m_Text: No
 --- !u!222 &1265740460
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1459,7 +1393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sure thang
+  m_Text: Yes
 --- !u!222 &1265961221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1709,7 +1643,7 @@ RectTransform:
   - {fileID: 356219168}
   - {fileID: 43691266}
   m_Father: {fileID: 398968029}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

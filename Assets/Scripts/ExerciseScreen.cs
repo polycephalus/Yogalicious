@@ -11,6 +11,9 @@ public class ExerciseScreen : MonoBehaviour {
     public Text intensityText;
     public Text difficultyText;
 
+    public GameObject fav;
+    public GameObject noFav;
+
     public Image intensitsdafpsdaof; //----------------------------------------------!!
 
     public void setText(string nameText, string descriptionText, string muscleGroupsText, string intensityText, string difficultyText)
@@ -20,5 +23,19 @@ public class ExerciseScreen : MonoBehaviour {
         this.muscleGroupsText.text = "Muscle Groups: " + muscleGroupsText;
         this.intensityText.text = "Intensity: " + intensityText;
         this.difficultyText.text = "Difficulty: " + difficultyText;
+    }
+
+    public void toggleFav(bool isFav)
+    {
+        if (isFav)
+        {
+            fav.SetActive(true);
+            noFav.SetActive(false);
+        }
+        else
+        {
+            fav.SetActive(false);
+            noFav.SetActive(true);
+        }
     }
 }

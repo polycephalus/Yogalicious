@@ -12,6 +12,8 @@ public class Exercise : MonoBehaviour {
 
     private VideoClip videoClip;
 
+    public Image intensityImage;
+
     private bool screenActive = false;
     private bool isFavourite;
     private int difficulty;

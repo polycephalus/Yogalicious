@@ -54,7 +54,7 @@ public class ListHandler : MonoBehaviour {
     private void Awake()
     {
         if (!isButton)
-        {        
+        {
             if (firstTimeActive)
             {
                 addExercisesAndPrograms();
@@ -63,6 +63,7 @@ public class ListHandler : MonoBehaviour {
             if (isExerciseView)
             {
                 screen.GetComponent<ExerciseScreen>().setText(selectedExercise.getName(), selectedExercise.getDescription(), selectedExercise.getMuscleGroup(), getConvertIntensityToString(selectedExercise.getIntensity()), getConvertDifficultyToString(selectedExercise.getDifficulty()));
+                screen.GetComponent<ExerciseScreen>().toggleFav(selectedExercise.getIsFavourite());
                 Debug.Log("ExerciseView");
             }
             if (isExerciseScene)
@@ -73,7 +74,7 @@ public class ListHandler : MonoBehaviour {
             if (isProgramEditView)
             {
                 Program p = selectedProgram;
-                screen.GetComponent<Program>().setValues(false, selectedProgram.getExerciseList(), selectedProgram.getName(), "", getConvertIntensityToString(selectedProgram.getIntensity()), getConvertDifficultyToString(selectedProgram.getDifficulty()));
+                screen.GetComponent<Program>().setValues(false, p.getExerciseList(), p.getName(), "", getConvertIntensityToString(p.getIntensity()), getConvertDifficultyToString(p.getDifficulty()));
                 screen.GetComponent<Program>().addButtons();
                 Debug.Log("ProgramEditView");
             }
@@ -82,6 +83,7 @@ public class ListHandler : MonoBehaviour {
                 Exercise e = selectedProgram.getExerciseList()[0];
                 screen.GetComponent<Program>().setValues(true, selectedProgram.getExerciseList(), selectedProgram.getName(), e.getName(), getConvertIntensityToString(selectedProgram.getIntensity()), getConvertDifficultyToString(selectedProgram.getDifficulty()));
                 screen.GetComponent<Program>().addButtons();
+                screen.GetComponent<Program>().toggleFav(selectedProgram.getIsFavourite());
                 Debug.Log("ProgramView");
             }
             if (isProgramScene)
@@ -157,17 +159,17 @@ public class ListHandler : MonoBehaviour {
     private string getConvertDifficultyToString(int difInt)
     {
         string dif = "";
-        switch (difInt)
+        if(difInt == 1)
         {
-            case 1:
-                dif = "Beginner";
-                break;
-            case 2:
-                dif = "Intermediate";
-                break;
-            case 3:
-                dif = "Expert";
-                break;
+            return "Beginner";
+        }
+        else if(difInt == 2)
+        {
+            return "Intermediate";
+        }
+        else if(difInt == 3)
+        {
+            return "Expert";
         }
         return dif;
     }
@@ -175,17 +177,17 @@ public class ListHandler : MonoBehaviour {
     private string getConvertIntensityToString(int intensityInt)
     {
         string intensity = "";
-        switch (intensityInt)
+        if (intensityInt == 1)
         {
-            case 1:
-                intensity = "Low";
-                break;
-            case 2:
-                intensity = "Medium";
-                break;
-            case 3:
-                intensity = "High";
-                break;
+            return "Low";
+        }
+        else if (intensityInt == 2)
+        {
+            return "Medium";
+        }
+        else if (intensityInt == 3)
+        {
+            return "High";
         }
         return intensity;
     }
@@ -276,12 +278,12 @@ public class ListHandler : MonoBehaviour {
 
     public void deleteExerciseFromTempProgram(Text str)
     {
-        for(int i = 0; i < tempProgram.Count; i++)
+        for(int i = 0; i < tempProgramAdded.Count; i++)
         {
-            Exercise e = tempProgram[i];
+            Exercise e = tempProgramAdded[i];
             if (e.getName().Equals(str.text))
             {
-                tempProgram.RemoveAt(i);
+                tempProgramAdded.RemoveAt(i);
             }
         }
     }
@@ -292,10 +294,10 @@ public class ListHandler : MonoBehaviour {
         for(int i = 0; i < programList.Count; i++)
         {
             Program p = programList[i];
-            if(p.Equals(selectedProgram))
+            if(p.getName().Equals(selectedProgram.getName()))
             {
                 Debug.Log("Tjä");
-                programList[i].removeExercise(e);
+                p.removeExercise(e);
             }
         }
     }
@@ -323,7 +325,7 @@ public class ListHandler : MonoBehaviour {
         }
         while (tempProgramAdded.Count > 0)
         {
-            tempProgram.RemoveAt(tempProgramAdded.Count - 1);
+            tempProgramAdded.RemoveAt(tempProgramAdded.Count - 1);
         }
     }
 
@@ -353,13 +355,7 @@ public class ListHandler : MonoBehaviour {
         }
         else if (hasDeletableExercise)
         {
-            for (int i = 0; i < tempProgram.Count; i++)
-            {
-                Exercise e = tempProgram[i];
-                GameObject tempButton = button;
-                tempButton.GetComponent<Exercise>().setText(e.getName(), getConvertIntensityToString(e.getIntensity()), getConvertDifficultyToString(e.getDifficulty()));
-                tempButton = Instantiate<GameObject>(button, listObject);
-            }
+            
         }
         else if (hasEditableProgram)
         {
@@ -406,15 +402,25 @@ public class ListHandler : MonoBehaviour {
             Exercise e = tempProgram[i];
             tempProgramAdded.Add(e);
         }
-        for(int i = 0; i < tempProgram.Count; i++)
+        while (tempProgram.Count > 0)
         {
-            tempProgram.RemoveAt(i);
+            tempProgram.RemoveAt(tempProgram.Count - 1);
         }
     }
 
     public void addOldDeleteableExerciseButtonsToContent()
     {
-
+        for (int i = 0; i < listObject.transform.childCount; i++)
+        {
+            Destroy(listObject.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < tempProgramAdded.Count; i++)
+        {
+            Exercise e = tempProgramAdded[i];
+            GameObject tempButton = button;
+            tempButton.GetComponent<Exercise>().setText(e.getName(), getConvertIntensityToString(e.getIntensity()), getConvertDifficultyToString(e.getDifficulty()));
+            tempButton = Instantiate<GameObject>(button, listObject);
+        }
     }
 
     public void addEditProgramButtonsToContent()
@@ -473,13 +479,36 @@ public class ListHandler : MonoBehaviour {
     //Här hittas en övning efter knapp och läggs till i det temporära programmet.
     public void addExerciseToArrayByBtn(Text txt)
     {
+        bool found = false;
         string str = txt.text;
-        for (int i = 0; i < exerciseList.Count; i++)
+
+        for(int i = 0; i < tempProgramAdded.Count; i++)
         {
-            Exercise temp = exerciseList[i];
-            if (str.Equals(temp.getName()))
+            Exercise e = tempProgramAdded[i];
+            if (e.getName().Equals(getExerciseByName(txt.text).getName()))
             {
-                tempProgram.Add(temp);
+                found = true;
+            }
+        }
+
+        for (int i = 0; i < tempProgram.Count; i++)
+        {
+            Exercise e = tempProgram[i];
+            if (e.getName().Equals(getExerciseByName(txt.text).getName()))
+            {
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            for (int i = 0; i < exerciseList.Count; i++)
+            {
+                Exercise temp = exerciseList[i];
+                if (str.Equals(temp.getName()))
+                {
+                    tempProgram.Add(temp);
+                }
             }
         }
     }
@@ -535,12 +564,12 @@ public class ListHandler : MonoBehaviour {
         string name = programNameField.text;
         if (!(name.Equals("")))
         {
-            if (tempProgram.Count > 0)
+            if (tempProgramAdded.Count > 0)
             {
                 if (!getNameExists(name))
                 {
-                    Program p = new Program(true, name, tempProgram);
-                    programList.Add(new Program(true, programNameField.text, tempProgram));
+                    Program p = new Program(true, name, tempProgramAdded);
+                    programList.Add(new Program(true, programNameField.text, tempProgramAdded));
                     addButton(p);
                     eraseArray();
                 }

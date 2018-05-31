@@ -1757,6 +1757,9 @@ MonoBehaviour:
   muscleGroupsText: {fileID: 345735374}
   intensityText: {fileID: 379001891}
   difficultyText: {fileID: 736360744}
+  fav: {fileID: 1843041801}
+  noFav: {fileID: 1462195596}
+  intensitsdafpsdaof: {fileID: 0}
 --- !u!1 &901431173
 GameObject:
   m_ObjectHideFlags: 0

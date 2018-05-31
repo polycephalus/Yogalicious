@@ -1279,7 +1279,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NO MOTHER FUCKING MATCHES
+  m_Text: No matches.
 --- !u!222 &369570676
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6667,12 +6667,12 @@ MonoBehaviour:
   isButton: 0
   isExercise: 0
   hasEditableProgram: 0
-  hasEditableProgramScreen: 0
   hasAddableExercise: 0
   hasDeletableExercise: 0
   isMainScene: 0
   isExerciseView: 0
   isExerciseScene: 0
+  isProgramEditView: 0
   isProgramView: 0
   isProgramScene: 0
   isFavourites: 0
