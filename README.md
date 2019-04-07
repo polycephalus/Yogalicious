@@ -1,2 +1,2 @@
 # Yogalicious
-Yogalicious training app
+Yogalicious training app by the Yogalicious team
